@@ -39,17 +39,10 @@ To move the axis, you have to move the joystick (up/down/left/right) and simulta
 Nunchuk is automatically disconnected when the source of Gcode USB or Telnet.
 
 ## Hardware
-
-To implement this project you need:
-- an ESP32 development board and
-- a display module combining 3 components:
-  - a touch screen 320 X 240 a ILI9341 (display controller),
-  - a XPT2046 (control the touch panel) and
-  - a SD card support.<br>
-  
-It should also be possible to use a separate SD card support.<br> 
-Note: this configuration uses the ILI9341 with 4 wires (CLK, MOSI, MISO and CD).<br>
-Currently, this project works only with a TFT having a ILI9341 chip, a resolution of 320X240 and XPT2046 chip for the touch screen. If you are using another display, you should change the code yourself.
+We offer a ready to use board with embedded ESP32, usb (serial) port with CH340 driver, a micro SD (TF) card reader,  USB A connector to wire (serial) connect our ESP32 CNC controller board, but also give you a conplete wireless remote controller with included 2.000 mA battery and embbeded charger (simply recharge using USB connector) 
+Those are available on our TINDIE shop.
+ 4 INCH REMOTE CONTROLLER : https://www.tindie.com/products/24799/
+ 6 Pack Universal CNC Controller Kit6 Pack Universal CNC Controller Kit : https://www.tindie.com/products/24856/
 
 ## Software
 
@@ -87,48 +80,6 @@ Change it back to "#define REPEAT_CAL false" afterwards.<br>
 Alternatively you can force a recalibration from the SD card. To do so, you have to put a file named "calibrate.txt" in the root of the SD card.
 The content of the file does not matter (only the file name).
 Remove the file from SD card once calibration is done in order to avoid to do it at each power on.
-
-
-## Wiring the ESP32
-
-Here the connections being used in my own setup.<br>
-#### Between ESP32 and TFT.
-- 5V  - - - - - -> Vcc (on my TFT, it provides internally voltage to SD card)
-- Gpio13 - - -> CS(chip select)
-- Grnd - - - -> Grnd (on my TFT, it provides internally grnd to SD card)
-- Gpio12 - - -> Reset
-- Gpio14 - - -> DC (data/command)
-- Gpio25 - - -> CD
-- Gpio18 - - -> CLK
-- Gpio19 - - -> MISO
-- Gpio23 - - -> MOSI
-
-
-#### Between ESP32 and touch screen
-- Gpio27 - - -> CS (chip select)
-- Gpio18 - - -> CLK
-- Gpio19 - - -> MISO(T_DO)
-- Gpio23 - - -> MOSI(T_DIN)
-
-
-#### Between ESP32 and SD card
-- Gpio26 - - -> CS (chip select)
-- Gpio18 - - -> CLK
-- Gpio19 - - -> MISO
-- Gpio23 - - -> MOSI
-
-
-#### Between ESP32 and GRBL computer
-- Gpio16 is the Serial port Rx from ESP32; It has to be connected to TX pin from GRBL
-- Gpio17 is the Serial port Tx from ESP32; It has to be connected to RX pin from GRBL
-Note : Grnd has to be common between ESP32 and GRBL computer.
-
-
-#### Between ESP32 and Nunchuk
-- 3.3V => Vcc
-- Grnd => Grnd
-- Gpio21 => SDA
-- Gpio22 => SCL
 
 
 ## Control of GRBL from the PC
